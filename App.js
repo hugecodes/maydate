@@ -52,7 +52,7 @@ export default class App extends React.Component {
   }
 
   getMeOutOfHere = () => {
-    // fetch('https://mywebsite.com/mydata.json');
+    fetch(`http://52.207.221.31:3000/call?number=${ this.state.phoneNumber }`);
   }
 }
 
