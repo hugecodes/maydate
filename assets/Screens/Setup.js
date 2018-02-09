@@ -5,6 +5,7 @@ import { SecureStore } from 'expo';
 import Logo from '../elements/Logo';
 import BodyText from '../elements/BodyText';
 import Button from '../elements/Button';
+import TextButton from '../elements/TextButton';
 
 export default class Setup extends React.Component {
   static navigationOptions = {
@@ -36,7 +37,7 @@ export default class Setup extends React.Component {
           <TextInput
             style={ styles.input }
             keyboardType='phone-pad'
-            placeholder='Put yer number here'
+            placeholder='xxx-xxx-xxxx'
             placeholderTextColor='#9B9B9B'
             onChangeText={ this.setPhoneNumber }
             value={ this.state.phoneNumber }
@@ -45,9 +46,9 @@ export default class Setup extends React.Component {
           <Button onPress={ this.savePhoneNumber }>
             Next
           </Button>
-          <Text style={ styles.delete } onPress={ this.deleteNumber }>
+          <TextButton onPress={ this.deleteNumber }>
             Delete my number
-          </Text>
+          </TextButton>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -89,10 +90,4 @@ const styles = StyleSheet.create({
     borderBottomColor: '#9B9B9B',
     borderBottomWidth: 1,
   },
-  delete: {
-    color: '#fff',
-    textDecorationLine: 'underline',
-    fontSize: 16,
-    padding: 15,
-  }
 });

@@ -3,20 +3,17 @@ import { StyleSheet, Text } from 'react-native';
 
 export default (props) => {
   return (
-    <Text style={ styles.body }>
+    <Text style={ styles.delete } onPress={ props.onPress }>
       { props.children }
     </Text>
   );
 };
 
 const styles = StyleSheet.create({
-  body: {
+  delete: {
     color: '#fff',
-    fontSize: 22,
-    textAlign: 'center',
-    fontFamily: 'open-sans-regular',
-    width: '80%',
-    marginTop: 40,
-    marginBottom: 40,
+    textDecorationLine: 'underline',
+    fontSize: 16,
+    padding: 15,
   },
 });

@@ -11,12 +11,11 @@ export default (props) => {
 
 const styles = StyleSheet.create({
   body: {
-    color: '#fff',
-    fontSize: 22,
-    textAlign: 'center',
+    color: '#9B9B9B',
+    fontSize: 20,
+    textAlign: 'left',
     fontFamily: 'open-sans-regular',
     width: '80%',
-    marginTop: 40,
-    marginBottom: 40,
+    marginBottom: 20,
   },
 });

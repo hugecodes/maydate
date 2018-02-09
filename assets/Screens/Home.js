@@ -1,10 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { SecureStore, Permissions } from 'expo';
+
+import Logo from '../elements/Logo';
+import BodyText from '../elements/BodyText';
+import FadedBodyText from '../elements/FadedBodyText';
+import Button from '../elements/Button';
+import TextButton from '../elements/TextButton';
 
 export default class Home extends React.Component {
   static navigationOptions = {
-    title: '𝕄𝔸𝕐𝔻𝔸𝕋𝔼',
+    header: null,
   };
 
   constructor(props) {
@@ -22,21 +28,24 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { haveCameraPermissions, haveAudioPermissions } = this.state;
-
     return (
-      <View>
-        { haveCameraPermissions && <Text>We got camera</Text> }
-        { haveAudioPermissions && <Text>We got audio</Text> }
-        <Button
-          title='Get me out of here'
-          color='#ff0000'
-          onPress={ this.showBlackout }
-        />
-        <Button
-          title='Settings'
-          onPress={ this.showSettings }
-        />
+      <View style={ styles.container }>
+        <Logo style={{ marginBottom: 0 }}/>
+        <BodyText>
+          Your phone will be called in 2 minutes after you set off one of the following triggers:
+        </BodyText>
+        <FadedBodyText>
+          Tap and hold anywhere on the screen for 1 second
+        </FadedBodyText>
+        <FadedBodyText>
+          Stare directly at your phone for 3 seconds
+        </FadedBodyText>
+        <Button onPress={ this.showBlackout }>
+          Let's go.
+        </Button>
+        <TextButton onPress={ this.showSettings }>
+          Settings
+        </TextButton>
       </View>
     )
   }
@@ -64,7 +73,7 @@ export default class Home extends React.Component {
   }
 
   showBlackout = () => {
-    this.props.navigation.navigate('Blackout', { 
+    this.props.navigation.navigate('Blackout', {
       haveCameraPermissions: this.state.haveCameraPermissions,
       haveAudioPermissions: this.state.haveAudioPermissions
     });
@@ -75,3 +84,12 @@ export default class Home extends React.Component {
   }
 
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    backgroundColor: '#2f2f2f',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  }
+};
