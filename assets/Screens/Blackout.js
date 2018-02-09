@@ -2,8 +2,10 @@ import React from 'react';
 import { StyleSheet, StatusBar, TouchableWithoutFeedback, View, Text, Vibration } from 'react-native';
 import { SecureStore, Accelerometer, Camera } from 'expo';
 
-
 const cameraType = Camera.Constants.Type.front;
+const detectionMode = Camera.Constants.FaceDetection.Mode.accurate;
+const detectionLandmarks= Camera.Constants.FaceDetection.Landmarks.all;
+const faceDetectionClassifications = Camera.Constants.FaceDetection.Classifications.all;
 
 export default class Home extends React.Component {
   static navigationOptions = {
@@ -20,14 +22,6 @@ export default class Home extends React.Component {
     }
   }
 
-  componentDidMount() {
-    
-  }
-
-  componentWillUnmount() {
-
-  }
-
   render() {
     return (
       <TouchableWithoutFeedback
@@ -38,10 +32,12 @@ export default class Home extends React.Component {
           <StatusBar hidden={ true } />
           <Camera 
             type={cameraType} 
+            faceDetectionMode={ detectionMode }
+            faceDetectionLandmarks={ detectionLandmarks }
+            faceDetectionClassifications={ faceDetectionClassifications }
             ref={ref => { this.camera = ref; }} 
             onFacesDetected={ !this.state.facesDetected ? this.detectAFace : null }
             onFaceDetectionError={ this.onFaceDetectionError }
-            faceDetectionLandmarks={Camera.Constants.FaceDetection.Landmarks.all}
           />
         </View>
       </TouchableWithoutFeedback>
@@ -49,22 +45,20 @@ export default class Home extends React.Component {
   }
 
   detectAFace = ({ faces }) => {
-    this.setState({ facesDetected: true });
-    this.getMeOutOfHere();
+    if (!faces.length) return;
+    const face = faces[0];
+    const isSmiling = face.smilingProbability;
+    const isWinking = face.rightEyeOpenProbability < 0.08 && face.leftEyeOpenProbability > 0.4;
+    
+    if (isSmiling <= 0.009 && isWinking) {
+      this.setState({ facesDetected: true });
+      this.getMeOutOfHere();
+    }
   }
 
   onFaceDetectionError = () => {
     this.setState({ facesDetected: false });
   }
-
-  // takeAPicture = async () => {
-  //   if (this.camera && this.state.facesDetected) {
-  //     let photo = await this.camera.takePictureAsync();
-  //     this.setState({ facesDetected: false });
-  //   } else {
-  //     alert('no faces detected');
-  //   }
-  // }
 
   getMeOutOfHere = () => {
     SecureStore.getItemAsync('phoneNumber').then((phoneNumber) => {
