@@ -3,6 +3,9 @@ import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
 import { SecureStore } from 'expo';
 
 export default class Setup extends React.Component {
+  static navigationOptions = {
+    title: 'Settings',
+  };
 
   constructor(props) {
     super(props);
@@ -12,10 +15,15 @@ export default class Setup extends React.Component {
     };
   }
 
+  componentDidMount() {
+    SecureStore.getItemAsync('phoneNumber').then((phoneNumber) => {
+      this.setState({ phoneNumber });
+    });
+  }
+
   render() {
     return (
       <View style={ styles.container }>
-        <Text>Phone number to call:</Text>
         <TextInput
           style={ styles.input }
           keyboardType='phone-pad'
@@ -27,13 +35,10 @@ export default class Setup extends React.Component {
           title='Save'
           onPress={ this.savePhoneNumber }
         />
-        <View style={{ marginTop: 40 }}>
-          <Button
-            title='Get me out of here'
-            color='#ff0000'
-            onPress={ this.getMeOutOfHere }
-          />
-        </View>
+        <Button
+          title='Delete my number'
+          onPress={ this.deleteNumber }
+        />
       </View>
     );
   }
@@ -44,16 +49,16 @@ export default class Setup extends React.Component {
   }
 
   savePhoneNumber = () => {
-    const number = this.state.phoneNumber;
-    SecureStore.setItemAsync('phoneNumber', number).then(() => {
-      this.props.navigation.navigate('Home', { number });
+    const phoneNumber = this.state.phoneNumber || '';
+    SecureStore.setItemAsync('phoneNumber', phoneNumber).then(() => {
+      this.props.navigation.navigate('Home', { phoneNumber });
     });
   }
 
-  getMeOutOfHere = () => {
-    fetch(`http://52.207.221.31:3000/call?number=${ this.state.phoneNumber }`);
+  deleteNumber = () => {
+    SecureStore.deleteItemAsync('phoneNumber');
+    this.setState({ phoneNumber: null });
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -62,7 +67,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginTop: 150,
   },
   input: {
     height: 40,
