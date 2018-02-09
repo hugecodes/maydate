@@ -4,10 +4,12 @@ import { StackNavigator } from 'react-navigation';
 
 import Home from './assets/Screens/Home';
 import Setup from './assets/Screens/Setup';
+import Blackout from './assets/Screens/Blackout';
 
 const routes = {
   Setup: { screen: Setup },
   Home: { screen: Home },
+  Blackout: { screen: Blackout },
 };
 
 export default class App extends React.Component {
