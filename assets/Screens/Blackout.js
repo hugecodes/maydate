@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, StatusBar, TouchableWithoutFeedback, View, Text, Vibration } from 'react-native';
-import { SecureStore, Accelerometer, Camera } from 'expo';
-
+import { SecureStore, Accelerometer, Camera, KeepAwake } from 'expo';
 
 const cameraType = Camera.Constants.Type.front;
 
@@ -36,9 +35,10 @@ export default class Home extends React.Component {
       >
         <View style={ styles.container }>
           <StatusBar hidden={ true } />
-          <Camera 
-            type={cameraType} 
-            ref={ref => { this.camera = ref; }} 
+          <KeepAwake />
+          <Camera
+            type={cameraType}
+            ref={ref => { this.camera = ref; }}
             onFacesDetected={ !this.state.facesDetected ? this.detectAFace : null }
             onFaceDetectionError={ this.onFaceDetectionError }
             faceDetectionLandmarks={Camera.Constants.FaceDetection.Landmarks.all}
