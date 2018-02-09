@@ -24,12 +24,11 @@ export default class Home extends React.Component {
 
     return (
       <View>
-        <Text>Home Screen</Text>
         { haveRecordingPermissions && <Text>We Good</Text> }
         <Button
           title='Get me out of here'
           color='#ff0000'
-          onPress={ this.getMeOutOfHere }
+          onPress={ this.showBlackout }
         />
         <Button
           title='Settings'
@@ -49,9 +48,10 @@ export default class Home extends React.Component {
     } catch(error) {
       console.log(error);
     }
-    
+
   }
-  getMeOutOfHere = () => {
+
+  showBlackout = () => {
     this.props.navigation.navigate('Blackout');
   }
 

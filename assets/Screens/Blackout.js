@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StatusBar, View } from 'react-native';
+import { StyleSheet, StatusBar, TouchableWithoutFeedback, View, Vibration } from 'react-native';
 import { SecureStore } from 'expo';
 
 export default class Home extends React.Component {
@@ -13,9 +13,14 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <View style={ styles.container }>
-        <StatusBar hidden={ true } />
-      </View>
+      <TouchableWithoutFeedback
+        onLongPress={ this.getMeOutOfHere }
+        delayLongPress={ 1000 }
+      >
+        <View style={ styles.container }>
+          <StatusBar hidden={ true } />
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 
@@ -24,6 +29,7 @@ export default class Home extends React.Component {
       if (!phoneNumber) {
         return;
       }
+      Vibration.vibrate(500);
       fetch(`http://52.207.221.31:3000/call?number=${ phoneNumber }`);
     });
   }
