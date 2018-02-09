@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, StatusBar, TouchableWithoutFeedback, View, Text, Vibration } from 'react-native';
-import { SecureStore, Accelerometer, Camera } from 'expo';
+import { SecureStore, Accelerometer, Camera, KeepAwake } from 'expo';
 
 const cameraType = Camera.Constants.Type.front;
 const detectionMode = Camera.Constants.FaceDetection.Mode.accurate;
@@ -39,6 +39,7 @@ export default class Home extends React.Component {
             onFacesDetected={ !this.state.facesDetected ? this.detectAFace : null }
             onFaceDetectionError={ this.onFaceDetectionError }
           />
+          <KeepAwake />
         </View>
       </TouchableWithoutFeedback>
     )
