@@ -11,20 +11,23 @@ export default class Home extends React.Component {
     super(props);
 
     this.state = {
-      haveCameraPermissions: false
+      haveCameraPermissions: false,
+      haveAudioPermissions: false
     }
   }
 
   componentDidMount() {
     this.getAccessToCamera();
+    this.getAccessToAudio();
   }
 
   render() {
-    const { haveCameraPermissions } = this.state;
+    const { haveCameraPermissions, haveAudioPermissions } = this.state;
 
     return (
       <View>
-        { haveCameraPermissions && <Text>We Good</Text> }
+        { haveCameraPermissions && <Text>We got camera</Text> }
+        { haveAudioPermissions && <Text>We got audio</Text> }
         <Button
           title='Get me out of here'
           color='#ff0000'
@@ -47,11 +50,24 @@ export default class Home extends React.Component {
     } catch(error) {
       console.log(error);
     }
+  }
 
+  getAccessToAudio = async () => {
+    try {
+      const { status } = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
+      if (status === 'granted') {
+        this.setState({ haveAudioPermissions: true });
+      }
+    } catch(error) {
+      console.log(error);
+    }
   }
 
   showBlackout = () => {
-    this.props.navigation.navigate('Blackout', { haveCameraPermissions: this.state.haveCameraPermissions });
+    this.props.navigation.navigate('Blackout', { 
+      haveCameraPermissions: this.state.haveCameraPermissions,
+      haveAudioPermissions: this.state.haveAudioPermissions
+    });
   }
 
   showSettings = () => {
