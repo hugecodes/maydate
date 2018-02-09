@@ -1,13 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
+import { SecureStore } from 'expo';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      phoneNumber: '',
+      phoneNumber: null,
     };
+  }
+
+  componentDidMount() {
+    SecureStore.getItemAsync('phoneNumber').then((phoneNumber) => {
+      this.setState({ phoneNumber });
+    });
   }
 
   render() {
@@ -19,10 +26,12 @@ export default class App extends React.Component {
           keyboardType='phone-pad'
           placeholder='Put yer number here'
           onChangeText={ this.setPhoneNumber }
+          value={ this.state.phoneNumber }
         />
         <Button
-          title='Save and arm'
+          title='Save'
           style={{ fontSize: 28, padding: 10 }}
+          onPress={ this.savePhoneNumber }
         />
       </View>
     );
@@ -30,6 +39,10 @@ export default class App extends React.Component {
 
   setPhoneNumber = (phoneNumber) => {
     this.setState({ phoneNumber });
+  }
+
+  savePhoneNumber = () => {
+    SecureStore.setItemAsync('phoneNumber', this.state.phoneNumber);
   }
 }
 
