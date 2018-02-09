@@ -28,12 +28,7 @@ export default class Home extends React.Component {
   }
 
   getMeOutOfHere = () => {
-    SecureStore.getItemAsync('phoneNumber').then((phoneNumber) => {
-      if (!phoneNumber) {
-        return;
-      }
-      fetch(`http://52.207.221.31:3000/call?number=${ phoneNumber }`);
-    });
+    this.props.navigation.navigate('Blackout');
   }
 
   showSettings = () => {
