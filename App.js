@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
 import { SecureStore } from 'expo';
+import Stt from 'react-native-stt'; // https://github.com/marshmelloX/react-native-stt
 
 export default class App extends React.Component {
   constructor(props) {
