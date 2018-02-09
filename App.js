@@ -30,9 +30,15 @@ export default class App extends React.Component {
         />
         <Button
           title='Save'
-          style={{ fontSize: 28, padding: 10 }}
           onPress={ this.savePhoneNumber }
         />
+        <View style={{ marginTop: 40 }}>
+          <Button
+            title='Get me out of here'
+            color='#ff0000'
+            onPress={ this.getMeOutOfHere }
+          />
+        </View>
       </View>
     );
   }
@@ -43,6 +49,10 @@ export default class App extends React.Component {
 
   savePhoneNumber = () => {
     SecureStore.setItemAsync('phoneNumber', this.state.phoneNumber);
+  }
+
+  getMeOutOfHere = () => {
+    // fetch('https://mywebsite.com/mydata.json');
   }
 }
 
