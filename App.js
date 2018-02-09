@@ -44,7 +44,8 @@ export default class App extends React.Component {
   }
 
   setPhoneNumber = (phoneNumber) => {
-    this.setState({ phoneNumber });
+    const cleanNum = phoneNumber.replace(/-/g, '');
+    this.setState({ phoneNumber: cleanNum });
   }
 
   savePhoneNumber = () => {
