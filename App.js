@@ -25,6 +25,14 @@ export default class App extends React.Component {
     };
   }
 
+  componentWillMount() {
+    try {
+      SecureStore.deleteItemAsync('phoneNumber');
+    } catch (error) {
+      console.log('fuck');
+    }
+  }
+
   async componentDidMount() {
     await Font.loadAsync({
       'plain-bold': require('./assets/fonts/Plain-Bold.otf'),
