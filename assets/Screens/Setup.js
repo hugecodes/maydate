@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { SecureStore } from 'expo';
 
 import Logo from '../elements/Logo';
@@ -27,27 +27,29 @@ export default class Setup extends React.Component {
 
   render() {
     return (
-      <View style={ styles.container }>
-        <Logo />
-        <BodyText style={ styles.body }>
-          Enter your phone number:
-        </BodyText>
-        <TextInput
-          style={ styles.input }
-          keyboardType='phone-pad'
-          placeholder='Put yer number here'
-          placeholderTextColor='#9B9B9B'
-          onChangeText={ this.setPhoneNumber }
-          value={ this.state.phoneNumber }
-          underlineColorAndroid='transparent'
-        />
-        <Button onPress={ this.savePhoneNumber }>
-          Next
-        </Button>
-        <Text style={ styles.delete } onPress={ this.deleteNumber }>
-          Delete my number
-        </Text>
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={ styles.container }>
+          <Logo />
+          <BodyText style={ styles.body }>
+            Enter your phone number:
+          </BodyText>
+          <TextInput
+            style={ styles.input }
+            keyboardType='phone-pad'
+            placeholder='Put yer number here'
+            placeholderTextColor='#9B9B9B'
+            onChangeText={ this.setPhoneNumber }
+            value={ this.state.phoneNumber }
+            underlineColorAndroid='transparent'
+          />
+          <Button onPress={ this.savePhoneNumber }>
+            Next
+          </Button>
+          <Text style={ styles.delete } onPress={ this.deleteNumber }>
+            Delete my number
+          </Text>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 
