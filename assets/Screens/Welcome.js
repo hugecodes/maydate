@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 
 import Button from '../elements/Button';
+import Logo from '../elements/Logo';
+import BodyText from '../elements/BodyText';
 
 export default class Welcome extends React.Component {
   static navigationOptions = {
@@ -15,13 +17,12 @@ export default class Welcome extends React.Component {
   render() {
     return (
       <View style={ styles.container }>
-        <Image
-          source={ require('../logo.png') }
-          style={ styles.logo }
-        />
+        <Logo />
         <Text style={ styles.header }>Welcome</Text>
         <Text style={ styles.header }>to Maydate.</Text>
-        <Text style={ styles.body }>Never sit through a bad date again.</Text>
+        <BodyText style={ styles.body }>
+          Never sit through a bad date again.
+        </BodyText>
         <Button onPress={ this.showSettings }>
           Get started!
         </Button>
@@ -41,26 +42,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  logo: {
-    height: 120,
-    resizeMode: Image.resizeMode.contain,
-    marginTop: 80,
-    marginBottom: 40,
-  },
   header: {
     color: '#fff',
     fontSize: 52,
     lineHeight: 52,
     textAlign: 'center',
     fontFamily: 'open-sans-regular',
-  },
-  body: {
-    color: '#fff',
-    fontSize: 26,
-    textAlign: 'center',
-    fontFamily: 'open-sans-regular',
-    width: '80%',
-    marginTop: 40,
-    marginBottom: 40,
   },
 });
