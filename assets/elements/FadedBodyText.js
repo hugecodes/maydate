@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     color: '#9B9B9B',
     fontSize: 20,
     textAlign: 'left',
-    fontFamily: 'open-sans-regular',
+    fontFamily: 'plain-regular',
     width: '80%',
     marginBottom: 20,
   },

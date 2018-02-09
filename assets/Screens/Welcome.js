@@ -18,6 +18,7 @@ export default class Welcome extends React.Component {
     return (
       <View style={ styles.container }>
         <Logo />
+        <Text style={{ marginTop: 30 }}/>
         <Text style={ styles.header }>Welcome</Text>
         <Text style={ styles.header }>to Maydate.</Text>
         <BodyText style={ styles.body }>
@@ -45,8 +46,8 @@ const styles = StyleSheet.create({
   header: {
     color: '#fff',
     fontSize: 52,
-    lineHeight: 52,
+    lineHeight: 48,
     textAlign: 'center',
-    fontFamily: 'open-sans-regular',
+    fontFamily: 'plain-regular',
   },
 });

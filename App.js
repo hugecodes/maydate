@@ -27,8 +27,9 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      'open-sans-regular': require('./assets/Open_Sans/OpenSans-Regular.ttf'),
-      'open-sans-bold': require('./assets/Open_Sans/OpenSans-Bold.ttf'),
+      'plain-bold': require('./assets/fonts/Plain-Bold.otf'),
+      'plain-regular': require('./assets/fonts/Plain-Regular.otf'),
+      'plain-ultrathin': require('./assets/fonts/Plain-Ultrathin.otf'),
     });
 
     try {

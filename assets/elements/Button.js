@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     fontSize: 26,
     color: '#2F2F2F',
     textAlign: 'center',
-    fontFamily: 'open-sans-regular',
+    fontFamily: 'plain-regular',
   },
 });
