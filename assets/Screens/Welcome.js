@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     fontSize: 52,
     lineHeight: 48,
     textAlign: 'center',
-    fontFamily: 'plain-regular',
+    fontFamily: 'plain-bold',
   },
 });
